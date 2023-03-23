@@ -1,6 +1,7 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
+const generateMarkdown = require('./utils/generateMarkdown');
 
 // TODO: Create an array of questions for user input
 const questions = [
@@ -16,7 +17,11 @@ const questions = [
 ];
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+function writeToFile(fileName, data) {
+    console.log(fileName);
+    console.log(data);
+    // generateMarkdown(data);
+}
 
 // TODO: Create a function to initialize app
 function init() {
@@ -53,12 +58,47 @@ function init() {
                 message: questions[5],
             },
             {
-                type: 'expand',
+                type: 'list',
                 name: 'license',
                 message: questions[6],
-                choices: "",
-            }
+                choices: [
+                    'MIT License',
+                    'GNU General Public License v2.0',
+                    'Mozilla Public License 2.0',
+                    'None',
+                ],
+                // choices: [
+                //     {
+                //         key: 't',
+                //         name: 'MIT License',
+                //         value: 'MIT License',
+                //     },
+                //     {
+                //         key: 'g',
+                //         name: 'GNU General Public License v2.0',
+                //         value: 'GNU General Public License v2.0',
+                //     },
+                //     {
+                //         key: 'm',
+                //         name: 'Mozilla Public License 2.0',
+                //         value: 'Mozilla Public License 2.0',
+                //     },
+                // ],
+            },
+            {
+                type: 'input',
+                name: 'github',
+                message: questions[7],
+            },
+            {
+                type: 'input',
+                name: 'email',
+                message: questions[8],
+            },
         ])
+        .then((answers) => {
+            writeToFile('README.md',answers);
+        })
 }
 
 // Function call to initialize app
