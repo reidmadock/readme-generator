@@ -10,7 +10,7 @@ const questions = [
     "Provide installation instructions:",
     "Provide usage information:",
     "Describe the contribution guidelines:",
-    "Provice testing instrucitons:",
+    "Provide testing instrucitons:",
     "Which license will your project use?",
     "What is your GitHub Username?",
     "What is your email?"
@@ -26,7 +26,7 @@ function writeToFile(fileName, data) {
 // TODO: Create a function to initialize app
 function init() {
     inquirer
-        .createPromptModule([
+        .prompt([
             {
                 type: 'input',
                 name: 'title',
@@ -67,23 +67,6 @@ function init() {
                     'Mozilla Public License 2.0',
                     'None',
                 ],
-                // choices: [
-                //     {
-                //         key: 't',
-                //         name: 'MIT License',
-                //         value: 'MIT License',
-                //     },
-                //     {
-                //         key: 'g',
-                //         name: 'GNU General Public License v2.0',
-                //         value: 'GNU General Public License v2.0',
-                //     },
-                //     {
-                //         key: 'm',
-                //         name: 'Mozilla Public License 2.0',
-                //         value: 'Mozilla Public License 2.0',
-                //     },
-                // ],
             },
             {
                 type: 'input',
