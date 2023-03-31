@@ -1,16 +1,17 @@
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
+// Credit to: https://gist.github.com/lukas-h/2a5d00690736b4c3a7ba for these badge links
 function renderLicenseBadge(license) {
   const links = [
-    ''
+    'https://img.shields.io/badge/License-MIT-yellow.svg',
+    'https://img.shields.io/badge/License-GPL_v2-blue.svg',
+    'https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg'
   ]
 
   if (license === 'MIT License') {
     return links[0];
   } else if (license === 'GNU General Public License v2.0') {
-    return links[0];
+    return links[1];
   } else if (license === 'Mozilla Public License 2.0') {
-    return links[0];
+    return links[2];
   } else if (license === 'None') {
     return '';
   } else {
@@ -22,9 +23,9 @@ function renderLicenseBadge(license) {
 // If there is no license, return an empty string
 function renderLicenseLink(license) {
   const links = [
-    '',
-    '',
-    ''
+    'https://opensource.org/licenses/MIT',
+    'https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html',
+    'https://opensource.org/licenses/MPL-2.0'
   ]
   
   if (license === 'MIT License') {
@@ -43,18 +44,14 @@ function renderLicenseLink(license) {
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
 function renderLicenseSection(license) {
-  let boilerplate = 'Distributed under the'
+  let boilerplate = 'Distributed under the '
 
-  if (license === 'MIT License') {
-    return;
-  } else if (license === 'GNU General Public License v2.0') {
-    return;
-  } else if (license === 'Mozilla Public License 2.0') {
-    return;
-  } else if (license === 'None') {
+  if (license === 'none') { //Defualt case is no license provided
     return '';
   } else {
-    return '';
+    return `${boilerplate} [${license}](${renderLicenseLink(license)}) <br />
+    ![${license}](${renderLicenseBadge(license)})
+    `;
   }
 }
 
@@ -62,9 +59,10 @@ function renderLicenseSection(license) {
  Fields needed in markdown: Title, Description, Table of contents, Installation, Usage, Credits, License,
  Contribute, Tests, Contact */
 function generateMarkdown(data) {
-  {title, description, installation, usage, contribute, tests, github, email}
-  return `# ${data.title}
-  # ${title}
+  //Destructure data object
+  const {title, description, installation, usage, contribute, tests, github, email, license} = data;
+  //Create and return template literal
+  return `# ${title}
 
   ## Table of Contents
   - [Installation](#installation)
@@ -89,7 +87,7 @@ function generateMarkdown(data) {
   ${contribute}
   
   ## Contact me
-  Here is my ![GitHub Profile](${github}) <br />
+  Here is my [GitHub Profile](${github}) <br />
   Or you can email me at ${email}
   - - -
   ## License
