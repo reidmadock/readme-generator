@@ -18,9 +18,8 @@ const questions = [
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
-    console.log(fileName);
-    console.log(data);
-    // generateMarkdown(data);
+    fs.writeFile(fileName, generateMarkdown(data), (err) =>
+        err ? console.log(err) : console.log("Success!"));
 }
 
 // TODO: Create a function to initialize app
@@ -39,7 +38,7 @@ function init() {
             },
             {
                 type: 'input',
-                name: 'install',
+                name: 'installation',
                 message: questions[2],
             },
             {
@@ -54,7 +53,7 @@ function init() {
             },
             {
                 type: 'input',
-                name: 'testing',
+                name: 'tests',
                 message: questions[5],
             },
             {
